@@ -11,14 +11,13 @@
 #if defined(_MSC_VER)
  // Make MS math.h define M_PI
  #define _USE_MATH_DEFINES
-#elif __GNUC__
- #define _GNU_SOURCE
 #endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <linmath.h>
@@ -280,7 +279,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     switch (key)
     {
         case GLFW_KEY_ESCAPE:
-            glfwSetWindowShouldClose(window, GL_TRUE);
+            glfwSetWindowShouldClose(window, GLFW_TRUE);
             break;
         case GLFW_KEY_SPACE:
             init_grid();
@@ -413,6 +412,7 @@ int main(int argc, char* argv[])
     glfwSetScrollCallback(window, scroll_callback);
 
     glfwMakeContextCurrent(window);
+    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
     glfwSwapInterval(1);
 
     glfwGetFramebufferSize(window, &width, &height);

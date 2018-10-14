@@ -1,7 +1,7 @@
 //========================================================================
 // A simple particle engine with threaded physics
 // Copyright (c) Marcus Geelnard
-// Copyright (c) Camilla Berglund <elmindreda@elmindreda.org>
+// Copyright (c) Camilla Berglund <elmindreda@glfw.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -27,8 +27,6 @@
 #if defined(_MSC_VER)
  // Make MS math.h define M_PI
  #define _USE_MATH_DEFINES
-#elif __GNUC__
- #define _GNU_SOURCE
 #endif
 
 #include <stdlib.h>
@@ -41,6 +39,7 @@
 #include <getopt.h>
 #include <linmath.h>
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 // Define tokens for GL_EXT_separate_specular_color if not already defined
@@ -877,7 +876,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         switch (key)
         {
             case GLFW_KEY_ESCAPE:
-                glfwSetWindowShouldClose(window, GL_TRUE);
+                glfwSetWindowShouldClose(window, GLFW_TRUE);
                 break;
             case GLFW_KEY_W:
                 wireframe = !wireframe;
@@ -991,6 +990,7 @@ int main(int argc, char** argv)
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     glfwMakeContextCurrent(window);
+    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
     glfwSwapInterval(1);
 
     glfwSetFramebufferSizeCallback(window, resize_callback);
