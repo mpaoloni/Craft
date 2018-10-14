@@ -2139,7 +2139,7 @@ void on_light() {
 
 void on_left_click() {
     State *s = &g->players->state;
-    int hx, hy, hz;
+    int hx, hy = 0, hz;
     int hw = hit_test(0, s->x, s->y, s->z, s->rx, s->ry, &hx, &hy, &hz);
     if (hy > 0 && hy < 256 && is_destructable(hw)) {
         set_block(hx, hy, hz, 0);
@@ -2152,7 +2152,7 @@ void on_left_click() {
 
 void on_right_click() {
     State *s = &g->players->state;
-    int hx, hy, hz;
+    int hx, hy = 0, hz;
     int hw = hit_test(1, s->x, s->y, s->z, s->rx, s->ry, &hx, &hy, &hz);
     if (hy > 0 && hy < 256 && is_obstacle(hw)) {
         if (!player_intersects_block(2, s->x, s->y, s->z, hx, hy, hz)) {
