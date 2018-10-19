@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-option(WITH_ONLINE "WINDOWS" OFF)
+option(WINDOWS "WINDOWS" OFF)
 if(WINDOWS)
     set(CMAKE_SYSTEM_NAME Windows)
     set(CMAKE_SYSTEM_VERSION 1)
